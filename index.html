@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+            /* 1rem = 10px */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.5s ease;
+        }
+
+        a:hover {
+            color: #00809D;
+            text-shadow: 1px;
+        }
+
+        /* Left menu hover */
+        .nav-contain .col-12 {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-contain .col-12:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Card hover */
+        .nav-cards {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-cards:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            transition: transform 0.3s ease;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .nav-cards:hover img {
+            transform: scale(1.05);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            width: 40px;
+            transition: width 0.3s ease;
+            overflow: hidden;
+        }
+
+        .search-bar.open {
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .search-bar img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        #search {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            margin-left: 8px;
+            min-width: 0;
+        }
+
+        #closeIcon {
+            display: none;
+        }
+
+        .search-bar.open #closeIcon {
+            display: inline;
+        }
+
+        .search-bar.open #searchIcon {
+            display: none;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .heading-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid black;
+        }
+
+        .nav-bar-mini-row {
+            height: 5vh;
+            border-bottom: 1px solid black;
+        }
+
+        .container-mini-nav {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .container-contents {
+            display: grid;
+            border-bottom: 1px solid black;
+            grid-template-columns: repeat(4, 1fr);
+            height: 6vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .col-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.5rem;
+            border-right: 1px solid black;
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100%;
+        }
+
+        .col-content:last-child {
+            border-right: none;
+            /* remove border on last col */
+        }
+
+        .content-a,
+        .content-b,
+        .content-c,
+        .content-d {
+            font-size: 1.5rem;
+        }
+
+        .container-body {}
+
+        .central-theme-ui {}
+
+        .ab-bible {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            padding: 5px;
+        }
+
+        @media(max-width:500px) {
+            .heading-container {
+                height: 10vh;
+            }
+
+            .heading-text {
+                width: 75%;
+            }
+
+            .heading-text h1 {
+                text-align: center;
+                font-size: 3.45rem;
+                line-height: 1.5;
+                letter-spacing: 2px;
+                font-family: 'EB Garamond', serif;
+                font-weight: bolder;
+            }
+
+            .img-col {
+                display: flex;
+                height: 100%;
+                width: 25%;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .img-col img {
+                width: 70%;
+                height: 70%;
+            }
+
+            .container-body {
+                padding: 10px;
+            }
+
+            .ab-bible {}
+
+            .central-theme-ul {
+                display: grid;
+                grid-template-rows: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="text-center" style="font-size: 35px; font-family: 'EB Garamond', serif;">ABOUT THE BIBLE</div>
+        <div class="p-4 nav-contain" style="background-color: #FFBC4C;">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- LEFT SIDE -->
+                    <div class="col-12 col-lg-4" style="border-right:1px solid black;">
+                        <div class="row">
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">Home</div>
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">About the Bible</div>
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">Books of the Bible</div>
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">Bible Study</div>
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">Daily Devotion</div>
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">Prayers</div>
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">Bible Verses</div>
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">Commentaries</div>
+                            <div class="col-12 fs-1" style="font-family: 'Inter', sans-serif;">Contact Us</div>
+                        </div>
+                    </div>
+                    <!-- RIGHT SIDE -->
+                    <div class="col-12 col-lg-8">
+                        <p class="fs-1" style="font-family: 'Inter', sans-serif; font-weight: bolder;">For Kids:</p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="card nav-cards">
+                                    <img src="Daystar-Television-Network-Programmer-Superbook-Web-Header.png"
+                                        class="card-img-top" alt="SuperBook">
+                                    <div class="card-body">
+                                        <h5 class="card-title">SuperBook</h5>
+                                        <p class="card-text">
+                                            Superbook is an animated Bible series available on YouTube that brings the
+                                            stories of Scripture to
+                                            life for children and families...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col ">
+                                <div class="card nav-cards">
+                                    <img src="maxresdefault.jpg" class="card-img-top" alt="Bible In A NutShell">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Bible In A NutShell</h5>
+                                        <p class="card-text">
+                                            Bible In A NutShell is a simple and engaging way to understand the entire
+                                            story of the Bible in
+                                            short summaries...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-dark" style="background-color: #FFBC4C;">
+        <div class="container-fluid justify-content">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="search-bar" id="searchBox">
+                <label for="search"><img src="search.svg" alt="Search" id="searchIcon"></label>
+                <input type="text" id="search" placeholder="Search">
+            </div>
+        </div>
+    </nav>
+    <div class="heading-container">
+        <div class="img-col"><img src="pngwing.com.png"></div>
+        <div class="heading-text">
+            <h1>THE TRUTH</h1>
+        </div>
+        <div class="img-col"><img src="pngwing.com2.png"></div>
+    </div>
+
+    <div class="container-fluid container-mini-nav">
+        <div class="container-contents">
+            <div class="col-1-content col-content"><a href="#"><span class="content-a"
+                        style="text-transform:uppercase;">Preachings</span></a></div>
+            <div class="col-2-content col-content"><a href="#"><span class="content-b"
+                        style="text-transform:uppercase;">Parables</span></a></div>
+            <div class="col-3-content col-content"><a href="#"><span class="content-c"
+                        style="text-transform:uppercase;">History</span></a></div>
+            <div class="col-4-content col-content"><a href="#"><span class="content-d"
+                        style="text-transform:uppercase;">Prophecy</span></a></div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="container-body">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title fs-1">About Bible:</h3>
+                    <h5 class="card-title fs-4">The Bible — A Living Book of Divine Truth</h5>
+                    <p class="card-text fs-5">The Bible is more than a book — it is a divine library, a spiritual guide,
+                        and
+                        a historical record that has transformed billions of lives across centuries. Revered as the Word
+                        of God, it reveals God’s nature, His will for humanity, and His plan of redemption through Jesus
+                        Christ.</p>
+                </div>
+                <img src="image.PNG" class="card-img-bottom" alt="...">
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fs-1">Structure of the Bible:</h5>
+                    <p class="card-text fs-5">The Bible contains 66 books, divided into two major parts:</p>
+                </div>
+                <div class="ab-bible imgs">
+                    <img src="moses.jpg" class="card-img-bottom" alt="...">
+                    <img src="well.jpg" class="card-img-bottom" alt="...">
+                </div>
+                <div class="card-body" style="border-bottom: 1px solid black;">
+                    <h5 class="card-title fs-1">The Old Testament (39 books)</h5>
+                    <ul>
+                        <li class="fs-5">Written primarily in Hebrew (with some Aramaic).</li>
+                        <li class="fs-5">Focuses on God’s covenant with Israel, the creation of the world, the law,
+                            history, poetry,
+                            and prophecy.</li>
+                        <li style="list-style-type: none;" class="key-sections">
+                            <h5 class="fs-3">Key Sections:</h5>
+                            <ul>
+                                <li class="fs-5">The Pentateuch (Genesis to Deuteronomy) — The Law of Moses.</li>
+                                <li class="fs-5">Historical Books (Joshua to Esther) — Israel’s history.</li>
+                                <li class="fs-5">Poetry & Wisdom (Job to Song of Solomon) — Worship and human
+                                    experience.</li>
+                                <li class="fs-5">Prophets (Isaiah to Malachi) — Warnings and promises from God.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fs-1">The New Testament (27 books)</h5>
+                    <ul>
+                        <li class="fs-5">Written in Greek.</li>
+                        <li class="fs-5">Focuses on the life, death, and resurrection of Jesus Christ, and the growth of
+                            the early Church.</li>
+                        <li style="list-style-type: none;" class="key-sections">
+                            <h5 class="fs-3">Key Sections:</h5>
+                            <ul>
+                                <li class="fs-5">The Gospels (Matthew to John) — Accounts of Jesus’ life and teachings.
+                                </li>
+                                <li class="fs-5">Acts of the Apostles — The early Church’s history.</li>
+                                <li class="fs-5">Epistles (Romans to Jude) — Letters to believers and churches.</li>
+                                <li class="fs-5">Revelation — A prophetic vision of the end times.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="Bible-Timeline.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title fs-1">Timeline of the Bible:</h5>
+                            <ul style="list-style-type: square;">
+                                <li class="fs-5">Written over a span of 1,500 years.</li>
+                                <li class="fs-5">Around 1400 BC (Old Testament beginnings) to 100 AD (completion of the
+                                    New
+                                    Testament).</li>
+                                <li class="fs-5">Over 40 authors including kings, prophets, fishermen, shepherds, tax
+                                    collectors, and
+                                    doctors.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card bg-dark text-white">
+                <img src="snake.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                    <h1 class="card-title">Central Theme: God’s Redemption</h1>
+                    <p class="card-text">The Bible’s core message is
+                        redemption — how God created the world,
+                        how mankind fell into sin, and how God provides a way back to Him through Jesus Christ.</p>
+                </div>
+            </div>
+            <div class="central-theme-ul">
+                <div class="card mb-3">
+                    <img src="adameve.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">The beginning</h5>
+                        <p class="card-text">Genesis shows the beginning of creation and humanity.</p>
+                        <p class="card-text">It sets the stage for God’s plan for the world.</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <img src="tabernacle.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Israel</h5>
+                        <p class="card-text">Exodus to Malachi reveals God's relationship with Israel.</p>
+                        <p class="card-text">It highlights His covenant and guidance for His people.</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <img src="image-1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Jesus Christ</h5>
+                        <p class="card-text">The Gospels unveil the arrival of the Messiah — Jesus.</p>
+                        <p class="card-text">His life, teachings, and miracles transform humanity.</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <img src="jacob-sleeping-using-rock-pillow-600nw-2597839885.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Apostles</h5>
+                        <p class="card-text">The New Testament Epistles guide the Church.</p>
+                        <p class="card-text">They instruct believers on faith, hope, and love in action.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const searchBar = document.getElementById("searchBox");
+        const searchIcon = document.getElementById("searchIcon");
+        let close_icon = document.createElement("label");
+        close_icon.setAttribute("for", "search");
+        let img = document.createElement("img");
+        img.src = "x-circle.svg";
+        img.id = "closeIcon";
+        img.alt = "close";
+        img.style.width = "20px";
+        img.style.height = "20px";
+        img.style.marginLeft = "5px";
+        close_icon.append(img);
+        searchBar.appendChild(close_icon);
+
+        searchIcon.addEventListener("click", function () {
+            searchBar.classList.toggle("open");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!searchBar.contains(e.target) && searchBar.classList.contains("open")) {
+                searchBar.classList.remove("open");
+            }
+        });
+
+        document.getElementById("closeIcon").addEventListener("click", function () {
+            searchBar.classList.remove("open");
+        });
+    </script>
+</body>
+
+</html>
